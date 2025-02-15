@@ -38,13 +38,13 @@ export default function PostList() {
               <div className="flex gap-2 mt-2">
                 <button
                   onClick={() => setEditingPost(post)}
-                  className="btn btn-secondary rounded-full"
+                  className="btn btn-sm btn-primary btn-outline rounded-full"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => deleteMutation.mutate(post.id)}
-                  className="btn rounded-full"
+                  className="btn btn-sm ml-auto btn-outline rounded-full"
                 >
                   Delete
                 </button>

@@ -28,10 +28,16 @@ export default function EditPostForm({ post, onCancel }) {
         defaultValue={post.body}
       ></textarea>
       <div className="flex gap-2">
-        <button type="submit" className="btn btn-primary w-1/2">
+        <button
+          type="submit"
+          className="btn btn-sm btn-accent btn-outline rounded-full w-sm"
+        >
           Save
         </button>
-        <button onClick={onCancel} className="btn w-1/2">
+        <button
+          onClick={onCancel}
+          className="btn btn-sm btn-secondary btn-outline rounded-full w-sm"
+        >
           Cancel
         </button>
       </div>

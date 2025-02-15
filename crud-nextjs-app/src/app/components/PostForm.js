@@ -31,7 +31,10 @@ export default function PostForm() {
         placeholder="Body"
         className="textarea textarea-bordered w-full mb-2"
       ></textarea>
-      <button type="submit" className="btn btn-primary w-full">
+      <button
+        type="submit"
+        className="btn btn-primary rounded-full w-1/8 ml-auto"
+      >
         Create Post
       </button>
     </form>
