@@ -3,11 +3,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPost } from "../api/posts";
+import EditPostForm from "./EditPostForm";
 
 export default function PostForm() {
   const { register, handleSubmit, reset } = useForm();
   const queryClient = useQueryClient();
-
   const mutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {

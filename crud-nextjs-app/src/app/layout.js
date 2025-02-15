@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function RootLayout({ children }) {
   const [queryClient] = useState(() => new QueryClient());
   return (
-    <html>
+    <html lang="en" data-theme="dark">
       <body>
         <QueryClientProvider client={queryClient}>
           {children}
