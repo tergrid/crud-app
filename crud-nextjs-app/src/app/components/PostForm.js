@@ -26,8 +26,12 @@ export default function PostForm() {
   const mutation = useMutation({
     mutationFn: createPost,
     onSuccess: (createdPost) => {
+      const uniquePost =
+        createdPost.id === 101
+          ? { ...createdPost, id: `${createdPost.id}-${Date.now()}` }
+          : createdPost;
       queryClient.setQueryData(["posts"], (oldPosts = []) => [
-        createdPost,
+        uniquePost,
         ...oldPosts,
       ]);
       reset();
