@@ -18,7 +18,17 @@ export default function PostList() {
 
   const deleteMutation = useMutation({
     mutationFn: deletePost,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    onMutate: async (postId) => {
+      await queryClient.cancelQueries({ queryKey: ["posts"] });
+      const previousPosts = queryClient.getQueryData(["posts"]);
+      queryClient.setQueryData(["posts"], (old) =>
+        old.filter((post) => post.id !== postId)
+      );
+      return { previousPosts };
+    },
+    onError: (err, postId, context) => {
+      queryClient.setQueryData(["posts"], context.previousPosts);
+    },
   });
 
   if (isLoading) return <p>Loading...</p>;

@@ -1,20 +1,53 @@
 "use client";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updatePost } from "../api/posts";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const postSchema = z.object({
+  title: z.string().min(1, { message: "Title is required" }),
+  body: z.string().min(1, { message: "Body is required" }),
+});
 
 export default function EditPostForm({ post, onCancel }) {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       title: post.title,
       body: post.body,
     },
+    resolver: zodResolver(postSchema),
+  });
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (data) => updatePost(post.id, data),
+    onSuccess: (updatedPost) => {
+      // Manually update the cached posts to reflect the updated data
+      queryClient.setQueryData(["posts"], (oldPosts) =>
+        oldPosts.map((p) =>
+          p.id === updatedPost.id ? { ...p, ...updatedPost } : p
+        )
+      );
+      // Exit edit mode
+      onCancel();
+    },
+    onError: (error) => {
+      console.error("Update failed", error);
+    },
   });
 
+  const onSubmit = (data) => {
+    mutation.mutate(data);
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit((data) => console.log(data))}
-      className="p-4 card shadow-lg"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="p-4 card shadow-lg">
       <input
         {...register("title")}
         placeholder="Title"
@@ -32,7 +65,7 @@ export default function EditPostForm({ post, onCancel }) {
           type="submit"
           className="btn btn-sm btn-accent btn-outline rounded-full w-sm"
         >
-          Save
+          {mutation.isLoading ? "Saving..." : "Save"}
         </button>
         <button
           onClick={onCancel}
