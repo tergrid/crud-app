@@ -142,6 +142,13 @@ Update (Edit) Functionality
     Resolution:
     Adopted a persistent update approach in the edit form. Once the API call returns success, the cache is manually updated to reflect the edited post.
 
+Duplicate Key Issue Due to JSONPlaceholder's ID Behavior
+
+    Issue:
+    JSONPlaceholder always returns the same id (typically 101) for every new post. As a result, when multiple posts are created, duplicate keys appear, leading to React warnings and rendering issues.
+    Resolution:
+    In the create mutation’s onSuccess handler, a unique id is generated (for example, by appending a timestamp) to the post if the returned id is 101. This ensures that every new post in the cache has a unique key.
+
 
 🚀 Deployment (Vercel)
 
