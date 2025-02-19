@@ -138,9 +138,10 @@ Deletion Functionality
 Update (Edit) Functionality
 
     Issue:
-    Updates did not persist because JSONPlaceholder returns its default data on refetch.
+    Updates were failing with a 500 error because JSON Server was throwing a "Cannot read properties of undefined (reading 'id')" error. Initially, the update request did not include the id in its payload. Later, when creating posts, a unique id was generated (e.g., "101- <timestamp>") to prevent duplicate keys. However, this non-numeric ID caused the update request to fail because JSONPlaceholder (or JSON Server) expects a numeric id.
     Resolution:
-    Adopted a persistent update approach in the edit form. Once the API call returns success, the cache is manually updated to reflect the edited post.
+    Modified the updatePost API function to check if the id is a locally generated string (containing a hyphen). If so, it simulates a successful update locally by returning the updated post without making an API call. Otherwise, it includes the id in the request body:
+
 
 Duplicate Key Issue Due to JSONPlaceholder's ID Behavior
 
