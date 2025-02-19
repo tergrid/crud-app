@@ -46,6 +46,7 @@ export default function PostForm() {
       onSubmit={handleSubmit((data) => mutation.mutate(data))}
       className="p-4 card shadow-lg"
     >
+      <h2 className="text-2xl font-bold mb-4">Create Post</h2>
       <input
         {...register("title")}
         placeholder="Title"
@@ -60,7 +61,7 @@ export default function PostForm() {
         type="submit"
         className="btn btn-primary rounded-full w-1/8 ml-auto"
       >
-        Create Post
+        Create
       </button>
     </form>
   );
