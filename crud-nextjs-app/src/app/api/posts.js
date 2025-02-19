@@ -9,7 +9,11 @@ export const getPosts = async () => {
 export const createPost = async (newPost) =>
   (await axios.post(API_URL, newPost)).data;
 
-export const updatePost = async (id, updatedPost) =>
-  (await axios.put(`${API_URL}/${id}`, updatedPost)).data;
+export const updatePost = async (id, updatedPost) => {
+  if (typeof id === "string" && id.includes("-")) {
+    return { id, ...updatedPost };
+  }
+  return (await axios.put(`${API_URL}/${id}`, { id, ...updatedPost })).data;
+};
 
 export const deletePost = async (id) => await axios.delete(`${API_URL}/${id}`);
