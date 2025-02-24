@@ -34,7 +34,6 @@ export default function EditPostForm({ post, onCancel }) {
           p.id === updatedPost.id ? { ...p, ...updatedPost } : p
         )
       );
-      // Exit edit mode
       onCancel();
     },
     onError: (error) => {
@@ -49,16 +48,13 @@ export default function EditPostForm({ post, onCancel }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      // Force white in light mode and neutral in dark mode
       className="p-4 card bg-white text-black dark:bg-neutral dark:text-white"
     >
       <input
         {...register("title")}
         placeholder="Title"
-        // Same forced colors for input
-        className="input input-bordered bg-slate-100 w-full mb-2 bg-white text-black dark:bg-neutral dark:text-white"
+        className="input input-bordered bg-slate-100 w-full mb-2 text-black dark:bg-neutral dark:text-white"
       />
-      {/* Display title error */}
       {errors.title && (
         <p className="text-error mb-2">{errors.title.message}</p>
       )}
@@ -66,10 +62,8 @@ export default function EditPostForm({ post, onCancel }) {
       <textarea
         {...register("body")}
         placeholder="Body"
-        // Same forced colors for textarea
         className="textarea textarea-bordered w-full mb-2 bg-slate-100 text-black dark:bg-neutral dark:text-white"
       ></textarea>
-      {/* Display body error */}
       {errors.body && <p className="text-error mb-2">{errors.body.message}</p>}
 
       <div className="flex justify-end gap-2">
