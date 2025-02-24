@@ -22,18 +22,18 @@ export default function Home() {
       {showSplash && (
         <div
           onClick={() => setShowSplash(false)}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-base-100 transition-opacity duration-500"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bgLight dark:bg-gray-900 transition-opacity duration-500"
         >
           <h1 className="text-8xl font-extrabold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             WriteUp
           </h1>
-          <h2 className="text-4xl font-bold text-center text-white mt-4">
+          <h2 className="text-4xl font-bold text-center text-txtBody mt-4 dark:text-slate-100">
             Jot Down Your Ideas
           </h2>
         </div>
       )}
       <header
-        className={`fixed top-0 left-0 w-full h-16 p-4 transition-transform duration-500 z-50 bg-bgLight dark:bg-neutral ${
+        className={`fixed top-0 left-0 w-full h-16 p-4 transition-transform duration-500 z-40 bg-bgLight dark:bg-gray-900 $}{
           showSplash
             ? "-translate-y-full opacity-0"
             : "translate-y-0 opacity-100"

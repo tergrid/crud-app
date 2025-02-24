@@ -66,20 +66,20 @@ export default function EditPostForm({ post, onCancel }) {
       ></textarea>
       {errors.body && <p className="text-error mb-2">{errors.body.message}</p>}
 
-      <div className="flex justify-end gap-2">
+      <div className="flex justify-end gap-2 ml-auto">
+        <button
+          type="button"
+          onClick={onCancel}
+          className="btn btn-sm btn-outline rounded-full"
+        >
+          Cancel
+        </button>
         <button
           type="submit"
           className="btn btn-sm btn-accent btn-outline rounded-full"
           disabled={mutation.isLoading}
         >
           {mutation.isLoading ? "Saving..." : "Save"}
-        </button>
-        <button
-          type="button"
-          onClick={onCancel}
-          className="btn btn-sm btn-secondary btn-outline rounded-full"
-        >
-          Cancel
         </button>
       </div>
     </form>

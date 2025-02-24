@@ -38,25 +38,30 @@ export default function PostList() {
     <div className="mt-4">
       <h2 className="text-2xl font-bold">Posts</h2>
       {posts.slice(0, 10).map((post) => (
-        <div key={post.id} className="card shadow-md bg-white p-4 mt-2">
+        <div
+          key={post.id}
+          className="card shadow-md bg-white p-4 mt-2 dark:bg-neutral"
+        >
           {editingPost?.id === post.id ? (
             <EditPostForm post={post} onCancel={() => setEditingPost(null)} />
           ) : (
             <>
-              <h3 className="text-lg text-black font-semibold">{post.title}</h3>
-              <p className="text-txtBody">{post.body}</p>
-              <div className="flex gap-2 mt-2">
+              <h3 className="text-lg text-black font-semibold dark:text-bgLight">
+                {post.title}
+              </h3>
+              <p className="text-txtBody dark:text-bgLight">{post.body}</p>
+              <div className="flex gap-2 mt-2 ml-auto">
+                <button
+                  onClick={() => deleteMutation.mutate(post.id)}
+                  className="btn btn-sm btn-secondary btn-outline rounded-full"
+                >
+                  Delete
+                </button>
                 <button
                   onClick={() => setEditingPost(post)}
                   className="btn btn-sm btn-primary btn-outline rounded-full"
                 >
                   Edit
-                </button>
-                <button
-                  onClick={() => deleteMutation.mutate(post.id)}
-                  className="btn btn-sm ml-auto btn-outline rounded-full"
-                >
-                  Delete
                 </button>
               </div>
             </>
