@@ -38,7 +38,7 @@ export default function PostList() {
     <div className="p-4">
       <h2 className="text-2xl font-bold">Posts</h2>
       {posts.slice(0, 10).map((post) => (
-        <div key={post.id} className="card shadow-lg p-4 mt-2">
+        <div key={post.id} className="card shadow-md p-4 mt-2">
           {editingPost?.id === post.id ? (
             <EditPostForm post={post} onCancel={() => setEditingPost(null)} />
           ) : (

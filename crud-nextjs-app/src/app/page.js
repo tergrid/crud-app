@@ -19,7 +19,6 @@ export default function Home() {
 
   return (
     <div className="relative">
-      {/* Splash Overlay */}
       {showSplash && (
         <div
           onClick={() => setShowSplash(false)}
@@ -33,23 +32,21 @@ export default function Home() {
           </h2>
         </div>
       )}
-
-      {/* Header that slides in */}
       <header
-        className={`fixed top-0 left-0 w-full p-4 transition-transform duration-500 ${
+        className={`fixed top-0 left-0 w-full h-16 p-4 transition-transform duration-500 z-50 bg-white dark:bg-neutral ${
           showSplash
             ? "-translate-y-full opacity-0"
             : "translate-y-0 opacity-100"
         }`}
       >
-        <h1 className="text-3xl font-bold">WriteUp</h1>
+        <h1 className="text-3xl font-bold text-black dark:text-white">
+          WriteUp
+        </h1>
       </header>
-
-      {/* Main Content */}
       <main
-        className={`pt-16 transition-opacity duration-500 ${
+        className={`transition-opacity duration-500 ${
           showSplash ? "opacity-0" : "opacity-100"
-        }`}
+        } pt-20`}
       >
         <div className="max-w-4xl w-full mx-auto p-4">
           <PostForm />

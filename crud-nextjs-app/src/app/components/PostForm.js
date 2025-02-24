@@ -44,19 +44,20 @@ export default function PostForm() {
   return (
     <form
       onSubmit={handleSubmit((data) => mutation.mutate(data))}
-      className="p-4 card shadow-lg"
+      className="p-4 card shadow-md bg-white text-black dark:bg-neutral dark:text-white"
     >
       <h2 className="text-2xl font-bold mb-4">Create Post</h2>
       <input
         {...register("title")}
         placeholder="Title"
-        className="input input-bordered w-full mb-2"
+        className="input input-bordered w-full mb-2 bg-slate-100 text-black dark:bg-neutral dark:text-white"
       />
       <textarea
         {...register("body")}
         placeholder="Body"
-        className="textarea textarea-bordered w-full mb-2"
+        className="textarea textarea-bordered w-full mb-2 bg-slate-100 text-black dark:bg-neutral dark:text-white"
       ></textarea>
+      {errors.body && <p className="text-error mb-2">{errors.body.message}</p>}
       <button
         type="submit"
         className="btn btn-primary rounded-full w-1/8 ml-auto"
