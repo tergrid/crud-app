@@ -7,7 +7,7 @@ export default function RootLayout({ children }) {
   const [queryClient] = useState(() => new QueryClient());
   return (
     <html lang="en" data-theme="dark">
-      <body>
+      <body className="bg-bgLight dark:bg-gray-900 min-h-screen">
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>
