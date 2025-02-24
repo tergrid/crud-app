@@ -47,29 +47,43 @@ export default function EditPostForm({ post, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-4 card shadow-lg">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      // Force white in light mode and neutral in dark mode
+      className="p-4 card bg-white text-black dark:bg-neutral dark:text-white"
+    >
       <input
         {...register("title")}
         placeholder="Title"
-        className="input input-bordered w-full mb-2"
-        defaultValue={post.title}
+        // Same forced colors for input
+        className="input input-bordered bg-slate-100 w-full mb-2 bg-white text-black dark:bg-neutral dark:text-white"
       />
+      {/* Display title error */}
+      {errors.title && (
+        <p className="text-error mb-2">{errors.title.message}</p>
+      )}
+
       <textarea
         {...register("body")}
         placeholder="Body"
-        className="textarea textarea-bordered w-full mb-2"
-        defaultValue={post.body}
+        // Same forced colors for textarea
+        className="textarea textarea-bordered w-full mb-2 bg-slate-100 text-black dark:bg-neutral dark:text-white"
       ></textarea>
-      <div className="flex gap-2">
+      {/* Display body error */}
+      {errors.body && <p className="text-error mb-2">{errors.body.message}</p>}
+
+      <div className="flex justify-end gap-2">
         <button
           type="submit"
-          className="btn btn-sm btn-accent btn-outline rounded-full w-sm"
+          className="btn btn-sm btn-accent btn-outline rounded-full"
+          disabled={mutation.isLoading}
         >
           {mutation.isLoading ? "Saving..." : "Save"}
         </button>
         <button
+          type="button"
           onClick={onCancel}
-          className="btn btn-sm btn-secondary btn-outline rounded-full w-sm"
+          className="btn btn-sm btn-secondary btn-outline rounded-full"
         >
           Cancel
         </button>

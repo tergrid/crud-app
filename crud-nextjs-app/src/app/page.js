@@ -33,7 +33,7 @@ export default function Home() {
         </div>
       )}
       <header
-        className={`fixed top-0 left-0 w-full h-16 p-4 transition-transform duration-500 z-50 bg-white dark:bg-neutral ${
+        className={`fixed top-0 left-0 w-full h-16 p-4 transition-transform duration-500 z-50 bg-bgLight dark:bg-neutral ${
           showSplash
             ? "-translate-y-full opacity-0"
             : "translate-y-0 opacity-100"

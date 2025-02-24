@@ -60,7 +60,7 @@ export default function PostForm() {
       {errors.body && <p className="text-error mb-2">{errors.body.message}</p>}
       <button
         type="submit"
-        className="btn btn-primary rounded-full w-1/8 ml-auto"
+        className="btn btn-primary rounded-full w-1/8 ml-auto text-slate-100"
       >
         Create
       </button>
